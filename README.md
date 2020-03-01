@@ -47,9 +47,6 @@ Weaknesses
 I’m not super good at backend/server things
 I still get confused when working with GitHub
 
-**Team Strengths and Weaknesses:** _Fill this in!_
-
-**Project Idea(s):** _Fill this in with three unique ideas! (Due by March 2)_
 ### Brown/RISD Buy+Sell
 What is it?
 A web app that combines the functionality of brown buying and selling, depop, and on-campus clothing swaps! It would display photos in a grid like depop and instagram, organized by item type instead of seller, to support quick and easy browsing.

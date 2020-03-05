@@ -48,6 +48,8 @@ I’m not super good at backend/server things
 I still get confused when working with GitHub
 
 ### Brown/RISD Buy+Sell
+_Rejected - no algorithm_
+
 What is it?
 A web app that combines the functionality of brown buying and selling, depop, and on-campus clothing swaps! It would display photos in a grid like depop and instagram, organized by item type instead of seller, to support quick and easy browsing.
 Problems the project is attempting to solve
@@ -72,6 +74,7 @@ managing multiple accounts
 Should we include built in pay feature?
 Should we include built in messaging?
 ### Goal Tracker
+_Rejected - no algorithm_
 
 What is it?
 A web app that makes it easy to set goals and keep track of them as well as give you a sense of satisfaction for getting things done. 
@@ -88,6 +91,7 @@ sns if we decide to implement
 keeping things generic
 
 ### Reverse Recipes
+_Unsure - likely, but you have to make recommendations beyond simple filtering_
 
 Problem the project is attempting to solve/how
 With millions of delicious recipes on the web, the biggest limitation to what we can make are the ingredients we currently have. The primary purpose of this project would be finding popular and highly-rated recipes that the user can make given several constraints (ingredients, utensils, time spent, cuisine). 

@@ -48,7 +48,7 @@ I’m not super good at backend/server things
 I still get confused when working with GitHub
 
 ### Brown/RISD Buy+Sell (edited)
-_Rejected - no algorithm_
+_Still rejected - not a complex algorithm_
 
 What is it?
 A web app that combines the functionality of brown buying and selling, depop, and on-campus clothing swaps! It would display photos in a grid like depop and instagram, organized by item type instead of seller, to support quick and easy browsing. It will also compile a list of suggested items using an algorithm on what you like, what you are looking for, and previous things that you have purchased.
@@ -75,7 +75,7 @@ Should we include built in pay feature?
 Should we include built in messaging?
 
 ### Goal Setter (edited)
-_Rejected - no algorithm_
+_Edit approved_
 
 What is it?
 A web application that takes the availability in your calendar and sets times for you to do daily/weekly/recurring tasks. Maybe you have something that you want to do for 10 minutes each day, or twice a week. This app would be able to automatically look for openings in your schedule to do these tasks.
@@ -100,7 +100,7 @@ In app achievement awards for getting things done on a consistent basis
 
 
 ### Reverse Recipes (edited)
-_Unsure - likely, but you have to make recommendations beyond simple filtering_
+_Edit approved_
 
 <Reverse Recipes>
 Problem the project is attempting to solve/how

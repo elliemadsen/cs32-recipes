@@ -1,0 +1,5 @@
+INPUT
+stars data/stars/bad-header-ten-star.csv
+OUTPUT
+ERROR: Invalid first row format.
+END

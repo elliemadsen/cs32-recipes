@@ -1,4 +1,4 @@
-package edu.brown.cs.student.util;
+package edu.brown.cs.student.main;
 
 
 import freemarker.template.Configuration;
@@ -6,6 +6,9 @@ import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
+import edu.brown.cs.student.recipe.RecipesDatabase;
+import edu.brown.cs.student.util.CombinedREPL;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import spark.ExceptionHandler;
@@ -58,6 +61,8 @@ public final class Main {
       runSparkServer((int) options.valueOf("port"));
     }
 
+    RecipesDatabase recipesDB = new RecipesDatabase();
+    
     repl.run();
 
   }

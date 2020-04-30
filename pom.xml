@@ -116,6 +116,16 @@
       <artifactId>sqlite-jdbc</artifactId>
       <version>3.30.1</version>
     </dependency>
+
+
+    <!--
+        MongoDB is a dependency for databases.
+    -->
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongodb-driver-sync</artifactId>
+      <version>4.0.2</version>
+    </dependency>
   </dependencies>
 
   <!-- Build section -->

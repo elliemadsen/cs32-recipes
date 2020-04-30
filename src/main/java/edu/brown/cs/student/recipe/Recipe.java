@@ -4,34 +4,68 @@ import java.util.List;
 
 public class Recipe {
 
+  private String id;
   private String name;
+  private String url;
   private String image;
+  private String rating;
+  private String yield;
   private List<String> ingredients;
-  private String text;
+  private List<String> instructions;
 
-  public Recipe(String name, String image, List<String> ingredients, String text) {
-    this.name = name;
+  public Recipe(String id, String name, String url, String image, String rating, String yield, List<String> ingredients, List<String> instructions) {
+    this.id = id;
+	this.name = name;
+	this.url = url;
     this.image = image;
+    this.rating = rating;
+    this.yield = yield;
     this.ingredients = ingredients;
-    this.text = text;
+    this.instructions = instructions;
   }
 
   /**
-   *
-   * @return the title of the recipe
+  * @return the id of the recipe
+  */
+ public String getID() {
+   return id;
+ }
+ 
+  /**
+   * @return the name of the recipe
    */
   public String getName() {
     return name;
   }
+  
+  /**
+   * @return the url to the external site of the recipe
+   */
+  public String getUrl() {
+    return url;
+  }
 
   /**
-   *
-   * @return the html image associated with the recipe
+   * @return the url to the image associated with the recipe
    */
   public String getImage() {
     return image;
   }
 
+  /**
+   * @return the rating of the recipe
+   */
+  public String getRating() {
+    return rating;
+  }
+  
+  /**
+   * @return the yield of the recipe
+   */
+  public String getYield() {
+    return yield;
+  }
+  
   /**
    *
    * @return a list of unique ingredient ids
@@ -42,10 +76,10 @@ public class Recipe {
 
   /**
    *
-   * @return the body of the recipe
+   * @return the instructions of the recipe
    */
-  public String getText() {
-    return text;
+  public List<String> getInstructions() {
+    return instructions;
   }
 
 }

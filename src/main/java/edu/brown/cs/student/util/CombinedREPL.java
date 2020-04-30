@@ -30,13 +30,8 @@ public class CombinedREPL extends REPL {
   public CombinedREPL(PrintWriter pw, InputStream s) {
 
     super(pw, s);
-
-    //creating new instances of starsREPL and timdbREPL
-
     setAccountRepl(new AccountREPL(pw,s));
-
     //adds commands from the two REPLs to the combined REPL
-
     addCommands(getAccountRepl().getCommands());
 
   }

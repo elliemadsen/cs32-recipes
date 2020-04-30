@@ -1,19 +1,36 @@
 package edu.brown.cs.student.recipe;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import org.bson.Document;
+
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoCursor;
+import com.mongodb.client.MongoDatabase;
 
 public class RecipesDatabase {
 
-  private Connection cxn;
+	private MongoCollection<Document> collection;
 
   public RecipesDatabase() {
-    // establish connection
+	  ConnectionString connString = new ConnectionString(
+			  "mongodb+srv://cs32-project:cs32-project@cluster0-xndfh.gcp.mongodb.net/test?retryWrites=true&w=majority");
+			MongoClientSettings settings = MongoClientSettings.builder()
+			    .applyConnectionString(connString)
+			    .retryWrites(true)
+			    .build();
+	  MongoClient mongoClient = MongoClients.create(settings);
+	  MongoDatabase database = mongoClient.getDatabase("foodnetwork");
+	  collection = database.getCollection("??");
+
+	  // test to print out the first document in the collection
+	  Document myDoc = collection.find().first();
+	  System.out.println(myDoc.toJson());
   }
 
   /**
@@ -27,35 +44,24 @@ public class RecipesDatabase {
    * @return
    */
   public List<Recipe> getRecipes(List<String> inclusions, List<String> exclusions) {
-
-    try {
-      List<Recipe> recipes = new ArrayList<>();
-
       // select * from recipe where recipe.ingredient = inclusion and
       // recipe.ingredient != exclusion
-      PreparedStatement prep = cxn.prepareStatement(" TODO ");
-      ResultSet rs = prep.executeQuery();
-      if (!rs.next()) {
-        return null;
-      } else {
-        do {
-          String name = rs.getString("name");
-          String image = rs.getString("image");
-          String text = rs.getString("text");
-          List<String> ingredients = Arrays.asList(rs.getString("ingredients").split(","));
-          Recipe recipe = new Recipe(name, image, ingredients, text);
-          recipes.add(recipe);
+	  
+	  MongoCursor<Document> cursor = collection.find().iterator();
+      List<Recipe> recipes = new ArrayList<>();
 
-        } while (rs.next());
-      }
-      prep.close();
-      rs.close();
+	  try {
+	      while (cursor.hasNext()) {
+	          System.out.println(cursor.next().toJson());
+
+//	          Recipe recipe = new Recipe(id, name, url, image, rating, yield, ingredients, instructions);
+//	          recipes.add(recipe);
+	      }
+	  } finally {
+	      cursor.close();
+	  }
 
       return recipes;
-    } catch (SQLException e) {
-      System.out.println("ERROR: SQL error occurred.");
-      return new ArrayList<Recipe>();
-    }
 
   }
 

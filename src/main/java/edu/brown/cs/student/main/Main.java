@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 
+import edu.brown.cs.student.recipe.IngredientsDatabase;
 import edu.brown.cs.student.recipe.RecipesDatabase;
+import edu.brown.cs.student.suggestions.Autocorrector;
 import edu.brown.cs.student.util.CombinedREPL;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -62,6 +64,8 @@ public final class Main {
     }
 
     RecipesDatabase recipesDB = new RecipesDatabase();
+    IngredientsDatabase ingredientsDB = new IngredientsDatabase();
+    Autocorrector ac = new Autocorrector(ingredientsDB);
     
     repl.run();
 

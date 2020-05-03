@@ -9,6 +9,7 @@ import java.io.StringWriter;
 
 import edu.brown.cs.student.recipe.IngredientsDatabase;
 import edu.brown.cs.student.recipe.RecipesDatabase;
+import edu.brown.cs.student.search.SearchAlgo;
 import edu.brown.cs.student.suggestions.Autocorrector;
 import edu.brown.cs.student.util.CombinedREPL;
 import joptsimple.OptionParser;
@@ -63,9 +64,8 @@ public final class Main {
       runSparkServer((int) options.valueOf("port"));
     }
 
-    RecipesDatabase recipesDB = new RecipesDatabase();
-    IngredientsDatabase ingredientsDB = new IngredientsDatabase();
-    Autocorrector ac = new Autocorrector(ingredientsDB);
+    //Autocorrector ac = new Autocorrector(new IngredientsDatabase());
+    //SearchAlgo search = new SearchAlgo(new RecipesDatabase());
     
     repl.run();
 

@@ -8,12 +8,12 @@ public class Recipe {
   private String name;
   private String url;
   private String image;
-  private String rating;
+  private Double rating;
   private String yield;
   private List<String> ingredients;
   private List<String> instructions;
 
-  public Recipe(String id, String name, String url, String image, String rating, String yield, List<String> ingredients, List<String> instructions) {
+  public Recipe(String id, String name, String url, String image, Double rating, String yield, List<String> ingredients, List<String> instructions) {
     this.id = id;
 	this.name = name;
 	this.url = url;
@@ -55,7 +55,7 @@ public class Recipe {
   /**
    * @return the rating of the recipe
    */
-  public String getRating() {
+  public Double getRating() {
     return rating;
   }
   

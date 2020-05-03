@@ -7,18 +7,18 @@ import java.util.List;
 import edu.brown.cs.student.recipe.Recipe;
 import edu.brown.cs.student.recipe.RecipesDatabase;
 
-public class Searcher {
+public class SearchAlgo {
 
   private RecipesDatabase recipesDatabase;
 
-  public Searcher(RecipesDatabase db) {
+  public SearchAlgo(RecipesDatabase db) {
     this.recipesDatabase = db;
   }
 
   /**
    * Calls RecipeDatabase.findRecipes(inclusions, exclusions) to get list of
-   * recipes. Filters by highest number of ingredients in pantry to return top 50
-   * matches.
+   * recipes. Filters by highest number of ingredients in pantry, followed by
+   * highest rating, to return top 50 matches.
    *
    * @param inclusions, which must be included in results
    * @param exclusions, which cannot be included in results
@@ -29,8 +29,11 @@ public class Searcher {
       List<String> pantry) {
     List<Recipe> results = recipesDatabase.getRecipes(inclusions, exclusions);
     Comparator<Recipe> comparator = new IngredientComparator(pantry);
-    Collections.sort(results, comparator); // sort by highest # ingredients in pantry
-    return results.subList(0, 50); // return top 50 recipes
+    Collections.sort(results, comparator); // sort by highest # ingredients in pantry, followed by rating
+    if (results.size() > 50) {
+        return results.subList(0, 50); // return top 50 recipes
+    }
+    return results;
   }
 
 }

@@ -5,7 +5,6 @@ edu\brown\cs\student\Account\AccountREPL$AccCommand.class
 edu\brown\cs\student\Account\AccountREPL$RestrictCommand.class
 edu\brown\cs\student\main\Main$ExceptionPrinter.class
 edu\brown\cs\student\Account\AccountREPL$LoginCommand.class
-edu\brown\cs\student\search\Searcher.class
 edu\brown\cs\student\Account\AccountDatabase.class
 edu\brown\cs\student\recipe\RecipesDatabase.class
 edu\brown\cs\student\search\IngredientComparator.class

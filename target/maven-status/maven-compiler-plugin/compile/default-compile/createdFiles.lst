@@ -1,0 +1,16 @@
+edu/brown/cs/student/recipe/RecipesDatabase.class
+edu/brown/cs/student/main/Main.class
+edu/brown/cs/student/util/CSVReader.class
+edu/brown/cs/student/main/Backend.class
+edu/brown/cs/student/main/Main$SignupHandler.class
+edu/brown/cs/student/recipe/Recipe.class
+edu/brown/cs/student/search/SearchAlgo.class
+edu/brown/cs/student/search/IngredientComparator.class
+edu/brown/cs/student/main/Main$RecipeHandler.class
+edu/brown/cs/student/util/REPL$Command.class
+edu/brown/cs/student/suggestions/Autocorrector.class
+edu/brown/cs/student/util/REPL.class
+edu/brown/cs/student/Account/AccountDatabase.class
+edu/brown/cs/student/suggestions/Trie.class
+edu/brown/cs/student/main/Main$ExceptionPrinter.class
+edu/brown/cs/student/recipe/IngredientsDatabase.class

@@ -101,20 +101,18 @@ public class Backend {
 		return ac.suggest(word);
 	}
 	
-	public  List<String> getInstructions() { //called when displaying the recipe
+	public  List<String> getInstructions() {
 		return recipe.getInstructions();
 	}
-	public  List<String> getIngredients() { //called when displaying the recipe
+	public  List<String> getIngredients() { 
 		return recipe.getIngredients();
 	}
-	public  String getImage() { //called when displaying the recipe
-		return recipe.getImage();
+
+	
+	public void setRecipe(Recipe rcp) { //called when user selects the recipe
+		recipe = rcp;
 	}
-	
-	public Recipe setRecipe() { //called when user selects the recipe
-		return null;
-		
-	}
-	
-	
+
 }
+	
+	

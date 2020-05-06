@@ -35,8 +35,17 @@ public class RecipesDatabase {
 			    .build();
 	  MongoClient mongoClient = MongoClients.create(settings);
 	  MongoDatabase database = mongoClient.getDatabase("recipes");
-	  collection = database.getCollection("foodnetwork");
-	  	  
+	  collection = database.getCollection("bbc");
+	  
+	 // printFirst();
+	  	  	  
+  }
+  
+  private void printFirst() {
+	  Document myDoc = collection.find().first();
+	  System.out.println("");	  System.out.println("");
+	  System.out.println(myDoc.toJson());
+	  System.out.println("");	  System.out.println("");
   }
   
 
@@ -53,7 +62,7 @@ public class RecipesDatabase {
   public List<Recipe> getRecipes(List<String> inclusions, List<String> exclusions) {
       // SQL version of query:
 	  // select * from recipe where recipe.ingredient = inclusion and recipe.ingredient != exclusion
-	  MongoCursor<Document> iterator = collection.find(and(all("ingredients", inclusions), nin("ingredients", exclusions))).iterator();
+	  MongoCursor<Document> iterator = collection.find(and(all("parsedIngredients", inclusions), nin("parsedIngredients", exclusions))).iterator();
       List<Recipe> res = new ArrayList<>();
 
 	  try {
@@ -67,8 +76,9 @@ public class RecipesDatabase {
 		          Double rating = Double.valueOf(doc.getEmbedded(List.of("rating"), Document.class).get("average").toString());
 		          String yield = doc.getString("yield");
 		          List<String> ingredients = doc.getList("ingredients", String.class);
+		          List<String> parsedIngredients = doc.getList("parsedIngredients", String.class);
 		          List<String> instructions = doc.getList("instructions", String.class);
-		          Recipe recipe = new Recipe(id, name, url, image, rating, yield, ingredients, instructions);
+		          Recipe recipe = new Recipe(id, name, url, image, rating, yield, ingredients, parsedIngredients, instructions);
 		          res.add(recipe);
 	          } catch (NullPointerException e) { // bc some recipes have null ratings (ignore these)
 	          }

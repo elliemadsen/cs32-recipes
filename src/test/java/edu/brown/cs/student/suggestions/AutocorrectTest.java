@@ -28,28 +28,31 @@ public class AutocorrectTest {
 	  @After
 	  public void tearDown() {
 	    ac = null;
-
 	  }
 
-//	@Test
-//	public void ledTest() {
-//		Set<String> suggestions = ac.suggest("appel");
-//		assertTrue(suggestions.contains("apple"));
-//		assertFalse(suggestions.contains("orange"));
-//	}
-//	
-//	@Test
-//	public void prefixTest() {
-//		Set<String> suggestions = ac.suggest("chick");
-//		assertTrue(suggestions.contains("chicken"));
-//		assertTrue(suggestions.contains("chickpeas"));
-//		assertFalse(suggestions.contains("chives"));
-//	}
-//	
-//	@Test
-//	public void whitespaceTest() {
-//		Set<String> suggestions = ac.suggest("ba na na");
-//		assertTrue(suggestions.contains("banana"));
-//	}
+	@Test
+	public void ledTest() {
+		assertTrue(ac.suggest("appel").contains("apple"));		
+		assertTrue(ac.suggest("grapez").contains("grapes"));
+		assertTrue(ac.suggest("chikcen").contains("chicken"));
+		assertTrue(ac.suggest("spinch").contains("spinach")); //led=1
+		assertTrue(ac.suggest("spnch").contains("spinach")); //led=2
 
+	}
+	
+	@Test
+	public void prefixTest() {
+		assertTrue(ac.suggest("chick").contains("chicken"));
+		assertTrue(ac.suggest("lemo").contains("lemon"));
+		assertTrue(ac.suggest("noo").contains("noodles"));
+		assertTrue(ac.suggest("smoked had").contains("smoked haddock"));
+	}
+	
+	@Test
+	public void whitespaceTest() {
+		assertTrue(ac.suggest("chickenbreast").contains("chicken breast"));
+		assertTrue(ac.suggest("sourcream").contains("sour cream"));
+		assertTrue(ac.suggest("redcabage").contains("red cabbage"));
+	}
+	
 }

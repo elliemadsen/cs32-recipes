@@ -16,14 +16,14 @@ public class IngredientComparator implements Comparator<Recipe> {
   @Override
   public int compare(Recipe r1, Recipe r2) {
 	  if (getNumItemsInPantry(r1) > getNumItemsInPantry(r2)) {
-		  return -1;
-	  } else if (getNumItemsInPantry(r2) > getNumItemsInPantry(r1)) {
 		  return 1;
+	  } else if (getNumItemsInPantry(r2) > getNumItemsInPantry(r1)) {
+		  return -1;
 	  } else { // if both recipes have equal # ingredients, sort by rating:
 		  if (r1.getRating() > r2.getRating()) {
-			  return -1;
-		  } else {
 			  return 1;
+		  } else {
+			  return -1;
 		  }
 	  }
   }
@@ -36,7 +36,7 @@ public class IngredientComparator implements Comparator<Recipe> {
    */
   private int getNumItemsInPantry(Recipe recipe) {
     int numItems = 0;
-    for (String ingredient : recipe.getIngredients()) {
+    for (String ingredient : recipe.getParsedIngredients()) {
       if (pantry.contains(ingredient)) {
         numItems++;
       }

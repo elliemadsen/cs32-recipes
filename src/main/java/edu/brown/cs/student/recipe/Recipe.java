@@ -11,9 +11,11 @@ public class Recipe {
   private Double rating;
   private String yield;
   private List<String> ingredients;
+  private List<String> parsedIngredients;
   private List<String> instructions;
 
-  public Recipe(String id, String name, String url, String image, Double rating, String yield, List<String> ingredients, List<String> instructions) {
+  public Recipe(String id, String name, String url, String image, Double rating, String yield,
+		  List<String> ingredients, List<String> parsedIngredients,List<String> instructions) {
     this.id = id;
 	this.name = name;
 	this.url = url;
@@ -21,6 +23,7 @@ public class Recipe {
     this.rating = rating;
     this.yield = yield;
     this.ingredients = ingredients;
+    this.parsedIngredients = parsedIngredients;
     this.instructions = instructions;
   }
 
@@ -68,11 +71,19 @@ public class Recipe {
   
   /**
    *
-   * @return a list of unique ingredient ids
+   * @return a list of full ingredients (including measurements) for gui
    */
   public List<String> getIngredients() {
     return ingredients;
   }
+  
+  /**
+  *
+  * @return a list of parsed ingredient names
+  */
+ public List<String> getParsedIngredients() {
+   return parsedIngredients;
+ }
 
   /**
    *

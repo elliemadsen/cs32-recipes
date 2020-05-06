@@ -10,6 +10,7 @@ import edu.brown.cs.student.recipe.RecipesDatabase;
 public class SearchAlgo {
 
   private RecipesDatabase recipesDatabase;
+  private static final int MAX_RESULTS = 50;
 
   public SearchAlgo(RecipesDatabase db) {
     this.recipesDatabase = db;
@@ -29,9 +30,10 @@ public class SearchAlgo {
       List<String> pantry) {
     List<Recipe> results = recipesDatabase.getRecipes(inclusions, exclusions);
     Comparator<Recipe> comparator = new IngredientComparator(pantry);
-    Collections.sort(results, comparator); // sort by highest # ingredients in pantry, followed by rating
-    if (results.size() > 50) {
-        return results.subList(0, 50); // return top 50 recipes
+    Collections.sort(results, comparator); // sort by highest # ingredients in pantry, followed by rating (ascending order)
+    Collections.reverse(results); // (descending order)
+    if (results.size() > MAX_RESULTS) {
+        return results.subList(0, MAX_RESULTS); // return top 50 recipes
     }
     return results;
   }

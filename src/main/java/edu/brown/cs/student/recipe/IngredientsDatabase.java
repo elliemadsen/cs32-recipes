@@ -26,11 +26,8 @@ public class IngredientsDatabase {
 			    .build();
 	  MongoClient mongoClient = MongoClients.create(settings);
 	  MongoDatabase database = mongoClient.getDatabase("recipes");
-	  collection = database.getCollection("ingredients");
-	
-	  // test to print out the first document in the collection
-//	  Document myDoc = collection.find().first();
-//	  System.out.println(myDoc.toJson());
+	  collection = database.getCollection("ingredients search");
+
 	}
 	
 	public List<String> getIngredients() {
@@ -38,8 +35,12 @@ public class IngredientsDatabase {
 	      List<String> ingredients = new ArrayList<>();
 		  try {
 		      while (cursor.hasNext()) {
-		         // System.out.println(cursor.next().toJson());
-		          ingredients.add(cursor.next().getString("ingredient"));
+		    	  for (String key: cursor.next().keySet()) {		    			
+		    		  // if key does not include numbers, add to trie
+		    		  if (!key.equals("_id") && !key.equals("site") && !key.matches(".*\\d.*")) {
+				          ingredients.add(key);
+		    		  }
+		    		}
 		      }
 		  } finally {
 		      cursor.close();

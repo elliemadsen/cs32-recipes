@@ -64,7 +64,7 @@ public final class Main {
       runSparkServer((int) options.valueOf("port"));
     }
 
-    //Autocorrector ac = new Autocorrector(new IngredientsDatabase());
+    // Autocorrector ac = new Autocorrector(new IngredientsDatabase());
     //SearchAlgo search = new SearchAlgo(new RecipesDatabase());
     
     repl.run();

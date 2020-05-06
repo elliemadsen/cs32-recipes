@@ -35,7 +35,7 @@ public class RecipesDatabaseQueryTest {
 				    .build();
 		  MongoClient mongoClient = MongoClients.create(settings);
 		  MongoDatabase database = mongoClient.getDatabase("recipes");
-		  collection = database.getCollection("foodnetwork");
+		  collection = database.getCollection("bbc");
 	}
 	
 	@After
@@ -45,11 +45,11 @@ public class RecipesDatabaseQueryTest {
 
 	/**
 	 * queries the recipes database for the recipe with a specific ID, creates a recipe object for this recipe (in this case, the recipe
-	 * is Loaded Baked Potato Casserole) and asserts the recipe's name, yield, rating, ingredients, and instructions are as expected.
+	 * is Spring chicken salad) and asserts the recipe's name, yield, rating, ingredients, and instructions are as expected.
 	 */
 	@Test
 	public void queryByIDTest() {
-		MongoCursor<Document> cursor = collection.find(eq("_id", new ObjectId("5eab1b9f135825b7f7696028"))).iterator();
+		MongoCursor<Document> cursor = collection.find(eq("_id", new ObjectId("5eb22ae2191b49d834401323"))).iterator();
 		Recipe recipe = null;
 		try {
 			while (cursor.hasNext()) {
@@ -61,36 +61,30 @@ public class RecipesDatabaseQueryTest {
 				Double rating = Double.valueOf(doc.getEmbedded(List.of("rating"), Document.class).get("average").toString());
 				String yield = doc.getString("yield");
 				List<String> ingredients = doc.getList("ingredients", String.class);
+				List<String> parsedIngredients = doc.getList("parsedIngredients", String.class);
 				List<String> instructions = doc.getList("instructions", String.class);
-				recipe = new Recipe(id, name, url, image, rating, yield, ingredients, instructions);
+				recipe = new Recipe(id, name, url, image, rating, yield, ingredients, parsedIngredients, instructions);
 			}
 		} finally {
 			cursor.close();
 		}
-		
-		assertEquals(recipe.getID(), "5eab1b9f135825b7f7696028");
-		assertEquals(recipe.getName(), "Loaded Baked Potato Casserole");
-		assertEquals(recipe.getYield(), "8 servings");
-		assertEquals(recipe.getRating().toString(), "4.4");
-		assertTrue(recipe.getIngredients().toString().contains("bacon"));
-		assertTrue(recipe.getIngredients().toString().contains("potatoes"));
-		assertTrue(recipe.getIngredients().toString().contains("cream cheese"));
-		assertTrue(recipe.getIngredients().toString().contains("sour cream"));
-		assertTrue(recipe.getIngredients().toString().contains("scallions"));
-		assertTrue(recipe.getIngredients().toString().contains("Kosher salt and freshly ground black pepper"));
-		assertEquals(recipe.getInstructions().get(0), "Preheat the oven to 425 degrees F and spray a 3-quart casserole dish with nonstick spray. Set aside.");
-		assertTrue(recipe.getInstructions().get(4).contains("Dollop the sour cream evenly over the casserole and sprinkle with the scallions and bacon pieces."));
 
+		assertEquals(recipe.getID(), "5eb22ae2191b49d834401323");
+		assertEquals(recipe.getName(), "Overnight oats with apple and nuts ");
+		assertEquals(recipe.getYield(), "Serves 2");
+		assertEquals(recipe.getRating().toString(), "4.833333333333333");
+		assertEquals(recipe.getParsedIngredients().get(0), "oats");
+		assertEquals(recipe.getParsedIngredients().get(3), "cinnamon");
+		assertEquals(recipe.getParsedIngredients().get(7), "blueberries");
 	}
 	
 	/**
-	 * Queries the recipes database for all recipes that contain the ingredients "2 tablespoons unsalted butter" and "1 cup chicken broth".
-	 * In this case, there is only one recipe that contains these two ingredients: Best Ever Green Bean Casserole.
+	 * Queries the recipes database for all recipes that contain the ingredient parsley
 	 */
 	@Test
 	public void queryByArrayTest() {
 
-		MongoCursor<Document> cursor = collection.find(all("ingredients", Arrays.asList("2 tablespoons unsalted butter", "1 cup chicken broth"))).iterator();
+		MongoCursor<Document> cursor = collection.find(all("parsedIngredients", Arrays.asList("parsley"))).iterator();
 		List<Recipe> res = new ArrayList<>();
 		try {
 			while (cursor.hasNext()) {
@@ -103,19 +97,18 @@ public class RecipesDatabaseQueryTest {
 					Double rating = Double.valueOf(doc.getEmbedded(List.of("rating"), Document.class).get("average").toString());
 					String yield = doc.getString("yield");
 					List<String> ingredients = doc.getList("ingredients", String.class);
+					List<String> parsedIngredients = doc.getList("parsedIngredients", String.class);
 					List<String> instructions = doc.getList("instructions", String.class);
-					Recipe recipe = new Recipe(id, name, url, image, rating, yield, ingredients, instructions);
+					Recipe recipe = new Recipe(id, name, url, image, rating, yield, ingredients, parsedIngredients, instructions);
 					res.add(recipe);
 				} catch (NullPointerException e) {
 				}
 			}
 		} finally {
 			cursor.close();
-		}
-		
+		}		
 		for (Recipe r : res) {
-			assertTrue(r.getIngredients().toString().contains("2 tablespoons unsalted butter"));
-			assertTrue(r.getIngredients().toString().contains("1 cup chicken broth"));
+			assertTrue(r.getParsedIngredients().toString().contains("parsley"));
 		}
 	}
 

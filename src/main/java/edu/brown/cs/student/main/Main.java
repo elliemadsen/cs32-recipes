@@ -11,7 +11,7 @@ import edu.brown.cs.student.recipe.IngredientsDatabase;
 import edu.brown.cs.student.recipe.RecipesDatabase;
 import edu.brown.cs.student.search.SearchAlgo;
 import edu.brown.cs.student.suggestions.Autocorrector;
-import edu.brown.cs.student.util.CombinedREPL;
+//import edu.brown.cs.student.util.CombinedREPL;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import spark.ExceptionHandler;
@@ -29,7 +29,7 @@ public final class Main {
 
   private static final int DEFAULT_PORT = 4567;
   private static PrintWriter pw = new PrintWriter(System.out);
-  private static CombinedREPL repl = new CombinedREPL(pw, System.in);
+//  private static CombinedREPL repl = new CombinedREPL(pw, System.in);
 
 
   /**
@@ -67,7 +67,7 @@ public final class Main {
     // Autocorrector ac = new Autocorrector(new IngredientsDatabase());
     //SearchAlgo search = new SearchAlgo(new RecipesDatabase());
     
-    repl.run();
+//    repl.run();
 
   }
 

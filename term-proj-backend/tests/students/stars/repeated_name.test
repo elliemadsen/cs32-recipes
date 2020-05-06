@@ -1,5 +1,0 @@
-INPUT
-stars data/stars/repeated-name-ten-star.csv
-OUTPUT
-ERROR: Duplicate star ID or duplicate star name.
-END

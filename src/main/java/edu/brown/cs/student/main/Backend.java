@@ -104,11 +104,15 @@ public class Backend {
 	public  List<String> getInstructions() {
 		return recipe.getInstructions();
 	}
+	
 	public  List<String> getIngredients() { 
 		return recipe.getIngredients();
 	}
-
 	
+	public String getName() {
+		return recipe.getName();
+	}
+
 	public void setRecipe(Recipe rcp) { //called when user selects the recipe
 		recipe = rcp;
 	}

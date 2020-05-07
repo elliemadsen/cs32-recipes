@@ -140,6 +140,7 @@ class Search extends React.Component {
      
           </form>
           <column className = {"column2"}>
+          { <img src={this.state.image}></img>}
 
           <p>Your current pantry:</p>
           <h4>Click on the item to search for recipes that include that item:</h4>
@@ -154,7 +155,6 @@ class Search extends React.Component {
           {this.list(this.state.restrictions)}
           </div>
 
-          { <img src={this.state.image}></img>}
 
           </column>
 

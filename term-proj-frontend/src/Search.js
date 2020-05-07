@@ -17,7 +17,7 @@ class Search extends React.Component {
           loading: true,
           test:true, //delete later
           load:false,
-          image:"undefined.jpg"
+          image:"https://legacymesa.com/wp-content/uploads/2015/07/No-Image-Available1-300x300.png"
 
         };
 
@@ -102,7 +102,9 @@ class Search extends React.Component {
 
     async mouse (menu) {
       console.log(menu.image)
+      if (menu.image != null|menu.image != undefined){
       this.setState({image:menu.image});
+      }
       // await $.post(API_URL, params,response =>{
       //   console.log(response.recipe);
       //   this.setState({suggestion:response.recipe});
@@ -112,7 +114,7 @@ class Search extends React.Component {
     }
     async mouseleave (menu) {
       console.log("leave")
-      this.setState({image:""});
+      this.setState({image:"https://legacymesa.com/wp-content/uploads/2015/07/No-Image-Available1-300x300.png"});
 
       // await $.post(API_URL, params,response =>{
       //   console.log(response.recipe);
@@ -154,6 +156,7 @@ class Search extends React.Component {
 
           {this.list(this.state.restrictions)}
           </div>
+          { <img src={this.state.image}></img>}
 
 
           </column>

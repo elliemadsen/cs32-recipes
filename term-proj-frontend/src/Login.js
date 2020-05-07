@@ -1,5 +1,5 @@
 import React from 'react';
-
+import $ from "jquery";
 
 
 class Login extends React.Component {
@@ -11,6 +11,7 @@ class Login extends React.Component {
       username: null,
       password: null,
       empty: false,
+      suc: "no"
     };
     this.mySubmitHandler = this.mySubmitHandler.bind(this);
 
@@ -28,14 +29,23 @@ class Login extends React.Component {
     else {
       this.setState({ empty: false });
 
-      //CALL Backend.login(this.state.username, this.state.password)
+        const API_URL = "http://localhost:4567/b/login";
+        const params = {"username": this.state.username, "password":this.state.password}
 
-      //if return value is 1, success.
-      this.setState({ fail: false });
-      window.location.href = "/search";
+        await $.post(API_URL, params,response =>{
+          console.log(response.results);
+          this.setState({suc:response.results});
+        })
 
-      //else, fail
-      this.setState({ fail: true });
+        if (this.state.suc === "yes"){
+          this.setState({ fail: false });
+           window.location.href = "/search";
+
+        }
+        else{
+          this.setState({fail:true});
+        }
+
     }
   }
 

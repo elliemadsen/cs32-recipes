@@ -1,5 +1,6 @@
 import React from 'react';
 import Menu from "./Menu";
+import $ from "jquery";
 
 class Recipe extends React.Component {
     constructor(props) {
@@ -8,13 +9,22 @@ class Recipe extends React.Component {
           recipe: null,
           ingredients: null,
           instructions: null,
-          loading: true
+          loading: true,
+          url: null,
+          name:null
         };
       }
 
       async componentDidMount(){
         //CALL Backend.getIngredients()
         //CALL Backend.getInstructions()
+
+        const API_URL = "http://localhost:4567/b/getRecipe";
+        const params = {"none": null}
+
+        await $.post(API_URL, params,response =>{
+          this.setState({url:response.recipe, name:response.name});
+        })
 
         this.setState({loading:false,  recipe: 'Spaghetti', ingredients: ['tomato', 'pasta'], instructions: ['cook pasta', 'make sauce']});
       }
@@ -32,8 +42,10 @@ class Recipe extends React.Component {
         <div>
                 <Menu />
 
-          <h1> Recipe </h1>
-          {this.state.loading ? (<p>loading...</p>):
+        <h1> {this.state.name} </h1>
+          <iframe src={this.state.url} allowfullscreen></iframe>
+
+          {/* {this.state.loading ? (<p>loading...</p>):
           ( this.state.ingredients === null||!this.state.instruction ===null||this.state.recipe === null ? 
           (<p>loading failed</p>) : (
 
@@ -58,7 +70,7 @@ class Recipe extends React.Component {
           </div>
           </column>
           </div>
-          ))}
+          ))} */}
 
           </div>
 

@@ -5,6 +5,19 @@
 
 }
 
+iframe {
+  width:80%;
+  height:500px;
+  margin: 30px 30px;
+
+
+}
+
+img{
+  height:200px;
+  width:auto;
+}
+
 h2 {
   color: white;
   text-align: center;

@@ -23,7 +23,8 @@ public class Backend {
 	private SearchAlgo searcher;
 	private AccountDatabase db;
 	private String user;
-	private Recipe recipe;
+	private String recipe;
+	private String name;
 
 	public Backend() {
 		ac = new Autocorrector(new IngredientsDatabase());
@@ -101,20 +102,36 @@ public class Backend {
 		return ac.suggest(word);
 	}
 	
-	public  List<String> getInstructions() {
-		return recipe.getInstructions();
+//	public  List<String> getInstructions() {
+//		return recipe.getInstructions();
+//	}
+//	
+//	public  List<String> getIngredients() { 
+//		return recipe.getIngredients();
+//	}
+//	
+//	public String getName() {
+//		return recipe.getName();
+//	}
+
+	public void setUrl(String url) { //called when user selects the recipe
+		recipe = url;
 	}
 	
-	public  List<String> getIngredients() { 
-		return recipe.getIngredients();
+	public String getUrl() {
+		return recipe;
+	}
+	
+	public String getUser() {
+		return user;
 	}
 	
 	public String getName() {
-		return recipe.getName();
+		return name;
 	}
-
-	public void setRecipe(Recipe rcp) { //called when user selects the recipe
-		recipe = rcp;
+	
+	public void setName(String nam) {
+		name = nam;
 	}
 
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import { getRestrictions, getAutoFill1, getAutoFill2, getPantry } from './Window';
 import Menu from "./Menu";
 import './Decoration.css';
+import $ from "jquery";
 
 
 class Pantry extends React.Component {
@@ -21,15 +22,26 @@ class Pantry extends React.Component {
       }
 
       async componentDidMount(){
-        //CALL Backend.getPantry()
-        this.setState({loading:false, pantry:getPantry(), suggestion:[]});
+        const API_URL = "http://localhost:4567/b/getPantry";
+        const params = {"none": null}
+
+        await $.post(API_URL, params,response =>{
+          console.log(response.pantry);
+          this.setState({pantry:response.pantry});
+        })
+        this.setState({loading:false, suggestion:[]});
       }
 
       async mySelectHandler (item) {
 
-        //CALL Backend.addToPantry(item)
-        alert("Added " + item + "to list of pantry");
-        //CALL Backend.getPantry() and setState())
+        const API_URL = "http://localhost:4567/b/addPantry";
+        const params = {"item": item}
+
+        await $.post(API_URL, params,response =>{
+          console.log(response.pantry);
+          this.setState({pantry:response.pantry});
+        })
+        
       }
 
       async myChangeHandler(event) {
@@ -38,22 +50,25 @@ class Pantry extends React.Component {
         this.setState({[nam]: val});
 
 
-        //CALL Backend.getAutocorrect(val) and setState(suggestion:)
+        // CALL Backend.getAutocorrect(val) and setState(suggestion:)
+        const API_URL = "http://localhost:4567/b/autocorrect";
+        const params = {"word": val}
 
-        //delete later
-        if (this.state.test){
-          this.setState({suggestion: getAutoFill1(), test:false});
-        } else{
-          this.setState({suggestion: getAutoFill2(), test:true});
+        await $.post(API_URL, params,response =>{
+          this.setState({suggestion:response.suggestion});
+        })
 
-        }
 
       }
 
       async myButtonHandler(item) {
-        //CALL Backend.removeFromPantry(item)
-        alert("removed "+item+" from pantry" );
-        //CALL Bckend.getPantry and setState()
+   
+        const API_URL = "http://localhost:4567/b/removePantry";
+        const params = {"item": item}
+
+        await $.post(API_URL, params,response =>{
+          this.setState({pantry:response.pantry});
+        })
   
      }
 
@@ -78,7 +93,6 @@ class Pantry extends React.Component {
         return (
         <div>
                 <Menu/>
-
           <h1> Pantry </h1>
 
           <form >
@@ -87,6 +101,7 @@ class Pantry extends React.Component {
             type='text'
             name='itemToAdd'
             onChange={this.myChangeHandler}
+            autocomplete="off"
           />
           </form>
           {this.state.loading ? (<p>loading...</p>):( !this.state.suggestion ? (<p>loading failed</p>) : (this.listSuggest(this.state.suggestion)))}

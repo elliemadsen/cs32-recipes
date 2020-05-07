@@ -25,7 +25,7 @@ class App extends React.Component {
 
 
       <Switch>
-      <Route path='/' render={(props)=><Home {...props} />} />      
+      {/* <Route path='/' render={(props)=><Home {...props} />} />       */}
       <Route path='/signup' render={(props)=><Signup {...props} />} />      
       <Route path='/login' render={(props)=><Login {...props}  />} />
       <Route path='/search' render={(props)=><Search {...props}  />} />

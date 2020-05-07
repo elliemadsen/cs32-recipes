@@ -12,7 +12,7 @@ class Home extends React.Component {
     }
     render(){
       return (
-      <div className="App">
+      <div className="Apps">
         <button onClick={this.recipeHandler}></button>
       </div>
     )};

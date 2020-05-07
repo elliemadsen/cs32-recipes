@@ -2,6 +2,7 @@ import React from 'react';
 import { getRestrictions, getAutoFill1, getAutoFill2 } from './Window';
 import Menu from "./Menu";
 import './Decoration.css';
+import $ from "jquery";
 
 
 class Restriction extends React.Component {
@@ -21,16 +22,26 @@ class Restriction extends React.Component {
       }
 
       async componentDidMount(){
-       
-        //CALL Backend.getRestriction()
-        this.setState({loading:false, restrictions:getRestrictions(), suggestion:[]});
+        const API_URL = "http://localhost:4567/b/getRestriction";
+        const params = {"none": null}
+
+        await $.post(API_URL, params,response =>{
+          console.log(response.restriction);
+          this.setState({restrictions:response.restriction});
+        })
+        this.setState({loading:false, suggestion:[]});
       }
 
       async mySelectHandler (item) {
 
-       //CALL Backend.addToRestriction(item)
-        alert("Added " + item + "to list of restrictions");
-        //CALL Backend.getRestriction()
+        const API_URL = "http://localhost:4567/b/addRestriction";
+        const params = {"item": item}
+
+        await $.post(API_URL, params,response =>{
+          console.log(response.restriction);
+          this.setState({restrictions:response.restriction});
+        })
+        
       }
 
       async myChangeHandler(event) {
@@ -38,25 +49,23 @@ class Restriction extends React.Component {
         let val = event.target.value;
         this.setState({[nam]: val});
 
+        const API_URL = "http://localhost:4567/b/autocorrect";
+        const params = {"word": val}
 
-        //CALL Backend.getAutocorrect(val) and setState(suggestion:)
-
-        //delete later
-        if (this.state.test){
-          this.setState({suggestion: getAutoFill1(), test:false});
-        } else{
-          this.setState({suggestion: getAutoFill2(), test:true});
-
-        }
+        await $.post(API_URL, params,response =>{
+          this.setState({suggestion:response.suggestion});
+        })
 
       }
 
       async myButtonHandler(item) {
 
-        //CALL Backend.removeFromRestriction(item)
-        alert("removed "+item+" from restrictions" );
-        //CALL Backend.getRestriction() and setState()
+        const API_URL = "http://localhost:4567/b/removeRestriction";
+        const params = {"item": item}
 
+        await $.post(API_URL, params,response =>{
+          this.setState({restrictions:response.restriction});
+        })
 
      }
 
@@ -90,6 +99,7 @@ class Restriction extends React.Component {
             type='text'
             name='itemToAdd'
             onChange={this.myChangeHandler}
+            autocomplete="off"
           />
           </form>
           {this.state.loading ? (<p>loading...</p>):( !this.state.suggestion ? (<p>loading failed</p>) : (this.listSuggest(this.state.suggestion)))}
